@@ -103,9 +103,9 @@ def find_piece_and_board(im):
 	board_x = 0
 	# 限制棋盘扫描的横坐标，避免音符 bug
 	if piece_x < w/2:
-		board_x_start,board_x_end = round(piece_x),w
+		board_x_start,board_x_end = int(round(piece_x)),int(w)
 	else:
-		board_x_start,board_x_end = 0,round(piece_x)
+		board_x_start,board_x_end = 0,int(round(piece_x))
 
 	# 寻找落点顶点
 	for by in range((h-w)//2,(h+w)//2,4):
@@ -132,7 +132,7 @@ def find_piece_and_board(im):
 def jump(piece_x,board_x,im,swipe_x1,swipe_y1):
 	distanceX = abs(board_x-piece_x)
 	shortEdge = min(im.size)
-	jumpLength = distanceX/shortEdge
+	jumpLength = round(float(distanceX)/shortEdge,4)
 	press_coefficient = 1700 #跳过整个宽度 需要按压的毫秒数
 	press_time = round(jumpLength*press_coefficient)
 	press_time = 0 if not press_time else max(press_time,200) #press_time大于0时限定最小值
